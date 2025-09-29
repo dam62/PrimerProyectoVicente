@@ -3,7 +3,7 @@
         xmlns:vm="using:PrimerProyectoVicente.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="650"
         x:Class="PrimerProyectoVicente.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
@@ -15,6 +15,42 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <UniformGrid Background="LightSeaGreen">
+        <!-- Formulario -->
+        <StackPanel>
+            <TextBlock HorizontalAlignment="Center" Margin="20" Text="RESERVA TU MESA"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <!-- Indica el tipo de evento -->
+                <TextBlock Text="Tipo de reserva:" Margin="5"/>
+                <ComboBox Width="140" Margin="5"
+                          SelectedItem="{Binding Mesa.evento}"
+                          ItemsSource="{Binding ListarEventosCommand}"></ComboBox>
+                
+                <!-- Indica el email del cliente -->
+                <TextBlock Text="Email:" Margin="10"/>
+                <TextBox Width="140" Margin="5"></TextBox>
+            </StackPanel>
+            <StackPanel Margin="30" Orientation="Horizontal" HorizontalAlignment="Center">
+                <!-- Indica el número de asientos -->
+                <TextBlock Text="Número de asientos:" Margin="5"/>
+                <TextBox Width="140" Margin="5"></TextBox>
+                
+                <!-- Indica la fecha de la reserva -->
+                <TextBlock Text="Fecha de reserva:" Margin="5"/>
+                <CalendarDatePicker></CalendarDatePicker>
+            </StackPanel>
+            <StackPanel Margin="30" Orientation="Horizontal" HorizontalAlignment="Center">
+                <CheckBox Margin="0, 0, 20, 0">Opciones avanzadas</CheckBox>
+                <CheckBox Margin="20, 0, 0, 0">Aceptar Condiciones</CheckBox>
+            </StackPanel>
+            <Button Margin="10" Background="DarkGreen" 
+                    HorizontalAlignment="Center" Width="200">Crear</Button>
+        </StackPanel>
+        
+        <!-- Consultas -->
+        <StackPanel>
+            
+        </StackPanel>
+    </UniformGrid>
 
 </Window>
