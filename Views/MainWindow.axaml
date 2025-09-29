@@ -24,7 +24,7 @@
                 <TextBlock Text="Tipo de reserva:" Margin="5"/>
                 <ComboBox Width="140" Margin="5"
                           SelectedItem="{Binding Mesa.evento}"
-                          ItemsSource="{Binding ListarEventosCommand}"></ComboBox>
+                          ItemsSource="{Binding listaEventos}"></ComboBox>
                 
                 <!-- Indica el email del cliente -->
                 <TextBlock Text="Email:" Margin="10"/>
@@ -43,13 +43,41 @@
                 <CheckBox Margin="0, 0, 20, 0">Opciones avanzadas</CheckBox>
                 <CheckBox Margin="20, 0, 0, 0">Aceptar Condiciones</CheckBox>
             </StackPanel>
-            <Button Margin="10" Background="DarkGreen" 
-                    HorizontalAlignment="Center" Width="200">Crear</Button>
+            <Button Width="200"
+                    Margin="0"
+                    Background="Transparent"
+                    Content="CREAR"
+                    Foreground="LawnGreen"
+                            
+                    IsVisible="{Binding ModoCrear}"
+                    HorizontalAlignment="Center"
+                    HorizontalContentAlignment="Center"/>
+            
+            <Button Width="200"
+                    IsVisible="{Binding ModoEditar}"
+                    Margin="10"
+                    Content="EDITAR"
+                    HorizontalAlignment="Center"
+                    HorizontalContentAlignment="Center"/>
+                
+            <Button Width="200"
+                    IsVisible="{Binding ModoEditar}"
+                    Margin="10"
+                    Content="CANCELAR"
+                    HorizontalAlignment="Center"
+                    HorizontalContentAlignment="Center"/>
         </StackPanel>
         
         <!-- Consultas -->
         <StackPanel>
-            
+            <ComboBox ItemsSource=
+                      "{Binding 
+                      Reservas}"/>
+            <ListBox SelectedItem="{Binding MesaEditar}"
+                     ItemsSource="{Binding 
+                     Mesa}">
+                
+            </ListBox>
         </StackPanel>
     </UniformGrid>
 
