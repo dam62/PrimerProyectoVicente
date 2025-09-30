@@ -19,16 +19,16 @@
         <!-- Formulario -->
         <Border Background="LightSeaGreen" BorderBrush="CornflowerBlue" Margin="10" Padding="5" BorderThickness="2">
             <StackPanel>
-                <TextBlock Margin="100, 0, 0, 20" Text="RESERVA TU MESA" HorizontalAlignment="Center"/>
+                <TextBlock Margin="0, 0, 0, 20" Text="RESERVA TU MESA" HorizontalAlignment="Center"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10,0,0,10">
                     <!-- Indica el tipo de evento -->
                     <TextBlock Text="Tipo de reserva:" Margin="5"/>
-                    <ComboBox Width="140" Margin="0,0, 100, 0"
+                    <ComboBox Width="140" Margin="0,0, 60, 0"
                               SelectedItem="{Binding Mesa.evento}"
                               ItemsSource="{Binding listaEventos}"></ComboBox>
                     
                     <!-- Indica el email del cliente -->
-                    <TextBlock Text="Email:" Margin="5"/>
+                    <TextBlock Text="Email:" Margin="40, 5, 5, 5"/>
                     <TextBox Width="140"></TextBox>
                 </StackPanel>
                 <StackPanel Margin="10, 30, 0, 0" Orientation="Horizontal" HorizontalAlignment="Center">
@@ -76,7 +76,31 @@
                 <ListBox SelectedItem="{Binding MesaEditar}"
                          ItemsSource="{Binding 
                          Mesa}">
+                    <Interaction.Behaviors>
+                        <EventTriggerBehavior EventName="DoubleTap">
+                            <InvokeCommandAction Command="{Binding EditarMesaCommand}"/>
+                        </EventTriggerBehavior>
+                    </Interaction.Behaviors>
                     
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="BlanchedAlmond" BorderBrush="Black" Margin="10" Padding="5" BorderThickness="2">
+                                <StackPanel>
+                                    <Image Width="30" Source="../Assets/Mesa.jpg"/>
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding evento}"/>
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding cliente}"/>
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding asientos}"/>
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding fecha}"/>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
                 </ListBox>
             </StackPanel>
         </Border>

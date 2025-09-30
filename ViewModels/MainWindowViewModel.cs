@@ -47,6 +47,7 @@ public partial class MainWindowViewModel : ViewModelBase
     public void ComprobarFecha()
     {
         CheckDate();
+        MostrarReserva();
     }
     
     private bool CheckDate()
@@ -97,6 +98,16 @@ public partial class MainWindowViewModel : ViewModelBase
     }
 
     [RelayCommand]
+    public void MostrarReserva()
+    {
+        Mesa.evento = "Cumpleaños";
+        Mesa.cliente = "manolo@gmail.com";
+        Mesa.asientos = 5;
+        Mesa.fecha = DateTime.Today;
+        Reservas.Add(Mesa);
+    }
+
+    [RelayCommand]
     public void CrearReserva()
     {
         if (!CheckDate())
@@ -107,7 +118,6 @@ public partial class MainWindowViewModel : ViewModelBase
         if (string.IsNullOrWhiteSpace(Mesa.cliente))
         {
             Mensaje = "Tienes que poner el email";
-            
         }
 
         if (!int.IsEvenInteger(Mesa.asientos))
@@ -116,7 +126,9 @@ public partial class MainWindowViewModel : ViewModelBase
         }
         else
         {
-            reservas.Add(Mesa);
+            Reservas.Add(Mesa);
+            Mesa.cliente = string.Empty;
+            Mesa.asientos = 0;
             Mesa = new MesaReservada();
         }
     }
