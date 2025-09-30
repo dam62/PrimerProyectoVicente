@@ -3,7 +3,7 @@
         xmlns:vm="using:PrimerProyectoVicente.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="650"
+        mc:Ignorable="d" d:DesignWidth="700" d:DesignHeight="650"
         x:Class="PrimerProyectoVicente.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
@@ -15,70 +15,71 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <UniformGrid Background="LightSeaGreen">
+    <UniformGrid Background="MidnightBlue" Columns="1">
         <!-- Formulario -->
-        <StackPanel>
-            <TextBlock HorizontalAlignment="Center" Margin="20" Text="RESERVA TU MESA"/>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <!-- Indica el tipo de evento -->
-                <TextBlock Text="Tipo de reserva:" Margin="5"/>
-                <ComboBox Width="140" Margin="5"
-                          SelectedItem="{Binding Mesa.evento}"
-                          ItemsSource="{Binding listaEventos}"></ComboBox>
+        <Border Background="LightSeaGreen" BorderBrush="CornflowerBlue" Margin="10" Padding="5" BorderThickness="2">
+            <StackPanel>
+                <TextBlock Margin="100, 0, 0, 20" Text="RESERVA TU MESA" HorizontalAlignment="Center"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10,0,0,10">
+                    <!-- Indica el tipo de evento -->
+                    <TextBlock Text="Tipo de reserva:" Margin="5"/>
+                    <ComboBox Width="140" Margin="0,0, 100, 0"
+                              SelectedItem="{Binding Mesa.evento}"
+                              ItemsSource="{Binding listaEventos}"></ComboBox>
+                    
+                    <!-- Indica el email del cliente -->
+                    <TextBlock Text="Email:" Margin="5"/>
+                    <TextBox Width="140"></TextBox>
+                </StackPanel>
+                <StackPanel Margin="10, 30, 0, 0" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <!-- Indica el número de asientos -->
+                    <TextBlock Text="Número de asientos:" Margin="5"/>
+                    <TextBox Width="140" Margin="0, 0, 30, 0"></TextBox>
+                    
+                    <!-- Indica la fecha de la reserva -->
+                    <TextBlock Text="Fecha de reserva:" Margin="30, 5, 5, 5"/>
+                    <CalendarDatePicker></CalendarDatePicker>
+                </StackPanel>
+                <StackPanel Margin="20, 30, 0, 30" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <CheckBox Margin="0, 0, 30, 0">Opciones avanzadas</CheckBox>
+                    <CheckBox Margin="30, 0, 0, 0">Aceptar Condiciones</CheckBox>
+                </StackPanel>
+                <Button Width="200"
+                        Margin="0"
+                        Content="CREAR"
+                        Background="ForestGreen"
+                        IsVisible="{Binding ModoCrear}"
+                        HorizontalAlignment="Center"
+                        HorizontalContentAlignment="Center"/>
                 
-                <!-- Indica el email del cliente -->
-                <TextBlock Text="Email:" Margin="10"/>
-                <TextBox Width="140" Margin="5"></TextBox>
+                <Button Width="200"
+                        IsVisible="{Binding ModoEditar}"
+                        Margin="10"
+                        Background="Gold"
+                        Content="EDITAR"
+                        HorizontalAlignment="Center"
+                        HorizontalContentAlignment="Center"/>
+                    
+                <Button Width="200"
+                        IsVisible="{Binding ModoEditar}"
+                        Margin="10"
+                        Content="CANCELAR"
+                        Background="DarkRed"
+                        HorizontalAlignment="Center"
+                        HorizontalContentAlignment="Center"/>
             </StackPanel>
-            <StackPanel Margin="30" Orientation="Horizontal" HorizontalAlignment="Center">
-                <!-- Indica el número de asientos -->
-                <TextBlock Text="Número de asientos:" Margin="5"/>
-                <TextBox Width="140" Margin="5"></TextBox>
-                
-                <!-- Indica la fecha de la reserva -->
-                <TextBlock Text="Fecha de reserva:" Margin="5"/>
-                <CalendarDatePicker></CalendarDatePicker>
-            </StackPanel>
-            <StackPanel Margin="30" Orientation="Horizontal" HorizontalAlignment="Center">
-                <CheckBox Margin="0, 0, 20, 0">Opciones avanzadas</CheckBox>
-                <CheckBox Margin="20, 0, 0, 0">Aceptar Condiciones</CheckBox>
-            </StackPanel>
-            <Button Width="200"
-                    Margin="0"
-                    Background="Transparent"
-                    Content="CREAR"
-                    Foreground="LawnGreen"
-                            
-                    IsVisible="{Binding ModoCrear}"
-                    HorizontalAlignment="Center"
-                    HorizontalContentAlignment="Center"/>
-            
-            <Button Width="200"
-                    IsVisible="{Binding ModoEditar}"
-                    Margin="10"
-                    Content="EDITAR"
-                    HorizontalAlignment="Center"
-                    HorizontalContentAlignment="Center"/>
-                
-            <Button Width="200"
-                    IsVisible="{Binding ModoEditar}"
-                    Margin="10"
-                    Content="CANCELAR"
-                    HorizontalAlignment="Center"
-                    HorizontalContentAlignment="Center"/>
-        </StackPanel>
+        </Border>
         
         <!-- Consultas -->
-        <StackPanel>
-            <ComboBox ItemsSource=
-                      "{Binding 
-                      Reservas}"/>
-            <ListBox SelectedItem="{Binding MesaEditar}"
-                     ItemsSource="{Binding 
-                     Mesa}">
-                
-            </ListBox>
-        </StackPanel>
+        <Border Background="LightSeaGreen" BorderBrush="CornflowerBlue" Margin="10" Padding="5" BorderThickness="2">
+            <StackPanel>
+                <ListBox SelectedItem="{Binding MesaEditar}"
+                         ItemsSource="{Binding 
+                         Mesa}">
+                    
+                </ListBox>
+            </StackPanel>
+        </Border>
     </UniformGrid>
 
 </Window>

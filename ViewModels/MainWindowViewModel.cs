@@ -58,7 +58,7 @@ public partial class MainWindowViewModel : ViewModelBase
         }
         else
         {
-            Mensaje = string.Empty; //Mensaje = "";
+            Mensaje = string.Empty;
             return true;
         }
     }
@@ -82,7 +82,6 @@ public partial class MainWindowViewModel : ViewModelBase
         {
             OpcionesAvanzadas = true;
         }
-        
     }
 
     [RelayCommand]
@@ -100,6 +99,25 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     public void CrearReserva()
     {
-        mesa = new MesaReservada();
+        if (!CheckDate())
+        {
+            Mensaje = "Tienes que indicar la fecha";
+        }
+
+        if (string.IsNullOrWhiteSpace(Mesa.cliente))
+        {
+            Mensaje = "Tienes que poner el email";
+            
+        }
+
+        if (!int.IsEvenInteger(Mesa.asientos))
+        {
+            Mensaje = "Indica el número de asientos";
+        }
+        else
+        {
+            reservas.Add(Mesa);
+            Mesa = new MesaReservada();
+        }
     }
 }
