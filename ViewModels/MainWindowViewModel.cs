@@ -27,32 +27,32 @@ public partial class MainWindowViewModel : ViewModelBase
     
     [ObservableProperty] private ObservableCollection<MesaReservada> reservas = new();
     
-    public List<string> listaEventos { set; get; }
+    public List<string> ListaEventos { set; get; }
     
     public MainWindowViewModel()
     {
         ListarEventos();
+        MostrarReserva();
     }
     
     private void ListarEventos()
     {
-        listaEventos = new()
+        ListaEventos = new()
         {
             "Cumpleaños", "Comunión", "Boda", "Fiesta"
         };
-        Mesa.evento = listaEventos[0];
+        Mesa.Evento = ListaEventos[0];
     }
     
     [RelayCommand]
     public void ComprobarFecha()
     {
         CheckDate();
-        MostrarReserva();
     }
     
     private bool CheckDate()
     {
-        if (Mesa.fecha < DateTime.Today)
+        if (Mesa.Fecha < DateTime.Today)
         {
             Mensaje = "La fecha no puede ser inferior a hoy";
             return false;
@@ -100,35 +100,55 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     public void MostrarReserva()
     {
-        Mesa.evento = "Cumpleaños";
-        Mesa.cliente = "manolo@gmail.com";
-        Mesa.asientos = 5;
-        Mesa.fecha = DateTime.Today;
-        Reservas.Add(Mesa);
+        MesaReservada m = new MesaReservada();
+        m.Evento = "Cumpleaños";
+        m.Cliente = "manolo@gmail.com";
+        m.Asientos = 5;
+        m.Fecha = DateTime.Now;
+        Reservas.Add(m);
+        
+        MesaReservada m2 = new MesaReservada();
+        m2.Evento = "Comunión";
+        m2.Cliente = "pepe@gmail.com";
+        m2.Asientos = 12;
+        m2.Fecha = DateTime.Now;
+        Reservas.Add(m2);
+        
+        MesaReservada m3 = new MesaReservada();
+        m3.Evento = "Fiesta";
+        m3.Cliente = "alex@gmail.com";
+        m3.Asientos = 8;
+        m3.Fecha = DateTime.Now;
+        Reservas.Add(m3);
     }
 
     [RelayCommand]
-    public void CrearReserva()
+    public void CrearReserva(object parameter)
     {
         if (!CheckDate())
         {
             Mensaje = "Tienes que indicar la fecha";
         }
-
-        if (string.IsNullOrWhiteSpace(Mesa.cliente))
+        
+        CheckBox check = (CheckBox)parameter;
+        
+        if (check.IsChecked is false)
         {
-            Mensaje = "Tienes que poner el email";
+            Mensaje = "Debes marcar el check";
+            check.Foreground = Brushes.Crimson;
+            check.FontWeight = FontWeight.Bold;
+            return;
         }
 
-        if (!int.IsEvenInteger(Mesa.asientos))
+        if (string.IsNullOrWhiteSpace(Mesa.Cliente))
         {
-            Mensaje = "Indica el número de asientos";
+            Mensaje = "Tienes que poner el email";
         }
         else
         {
             Reservas.Add(Mesa);
-            Mesa.cliente = string.Empty;
-            Mesa.asientos = 0;
+            Mesa.Cliente = string.Empty;
+            Mesa.Asientos = 1;
             Mesa = new MesaReservada();
         }
     }

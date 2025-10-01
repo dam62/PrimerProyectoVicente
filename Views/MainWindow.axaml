@@ -23,40 +23,57 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10,0,0,10">
                     <!-- Indica el tipo de evento -->
                     <TextBlock Text="Tipo de reserva:" Margin="5"/>
-                    <ComboBox Width="140" Margin="0,0, 60, 0"
-                              SelectedItem="{Binding Mesa.evento}"
-                              ItemsSource="{Binding listaEventos}"></ComboBox>
+                    <ComboBox Width="140" Margin="0,0, 60, 0" SelectedIndex="0"
+                              SelectedItem="{Binding Mesa.Evento}"
+                              ItemsSource="{Binding ListaEventos}"
+                              HorizontalAlignment="Center"></ComboBox>
                     
                     <!-- Indica el email del cliente -->
                     <TextBlock Text="Email:" Margin="40, 5, 5, 5"/>
-                    <TextBox Width="140"></TextBox>
+                    <TextBox Width="150" Text="{Binding Mesa.Cliente}"></TextBox>
                 </StackPanel>
                 <StackPanel Margin="10, 30, 0, 0" Orientation="Horizontal" HorizontalAlignment="Center">
                     <!-- Indica el número de asientos -->
                     <TextBlock Text="Número de asientos:" Margin="5"/>
-                    <TextBox Width="140" Margin="0, 0, 30, 0"></TextBox>
+                    <NumericUpDown Width="140" Margin="0, 0, 30, 0" Minimum="1" Maximum="50" Value="1" ContextFlyout="{Binding Mesa.Asientos}"></NumericUpDown>
                     
                     <!-- Indica la fecha de la reserva -->
                     <TextBlock Text="Fecha de reserva:" Margin="30, 5, 5, 5"/>
-                    <CalendarDatePicker></CalendarDatePicker>
+                    <CalendarDatePicker HorizontalAlignment="Center" SelectedDate="{Binding Mesa.Fecha}" Width="150">
+                        <Interaction.Behaviors>
+                            <EventTriggerBehavior EventName="SelectedDateChanged">
+                                <InvokeCommandAction Command="{Binding ComprobarFechaCommand}"/>
+                            </EventTriggerBehavior>
+                        </Interaction.Behaviors>
+                    </CalendarDatePicker>
                 </StackPanel>
+                
                 <StackPanel Margin="20, 30, 0, 30" Orientation="Horizontal" HorizontalAlignment="Center">
-                    <CheckBox Margin="0, 0, 30, 0">Opciones avanzadas</CheckBox>
-                    <CheckBox Margin="30, 0, 0, 0">Aceptar Condiciones</CheckBox>
+                    <!-- Opciones avanzadas -->
+                    <CheckBox Content="Opciones avanzadas" Margin="0, 0, 30, 0" Command="{Binding MostrarOpcionesAvanzadasCommand}"/>
+                    <StackPanel Width="200" Orientation="Horizontal" HorizontalAlignment="Center"
+                                IsVisible="{Binding OpcionesAvanzadas}">
+                        <TextBlock Margin="0,5,0,5" Text="Número de mesas:"></TextBlock>
+                        <NumericUpDown Minimum="1" Maximum="5" Value="1" Margin="5,0,5,5" Width="100"/>
+                    </StackPanel>
+                    
+                    <!-- Condiciones -->
+                    <CheckBox Content="Aceptas nuestras Condiciones"  Margin="30, 0, 0, 0"
+                              Command="{Binding EstadoInicialCheckCommand}"
+                              CommandParameter="{Binding ElementName=Condiciones}"
+                              Name="Condiciones"/>
                 </StackPanel>
+                
+                <TextBlock Text="{Binding Mensaje}" Margin="2" Foreground="Crimson" HorizontalAlignment="Center"/>
+                
+                <!-- Boton de crear -->
                 <Button Width="200"
                         Margin="0"
                         Content="CREAR"
                         Background="ForestGreen"
+                        Command="{Binding CrearReservaCommand}"
+                        CommandParameter="{Binding ElementName=Condiciones}"
                         IsVisible="{Binding ModoCrear}"
-                        HorizontalAlignment="Center"
-                        HorizontalContentAlignment="Center"/>
-                
-                <Button Width="200"
-                        IsVisible="{Binding ModoEditar}"
-                        Margin="10"
-                        Background="Gold"
-                        Content="EDITAR"
                         HorizontalAlignment="Center"
                         HorizontalContentAlignment="Center"/>
                     
@@ -64,24 +81,18 @@
                         IsVisible="{Binding ModoEditar}"
                         Margin="10"
                         Content="CANCELAR"
-                        Background="DarkRed"
+                        Background="Crimson"
                         HorizontalAlignment="Center"
                         HorizontalContentAlignment="Center"/>
             </StackPanel>
         </Border>
         
         <!-- Consultas -->
-        <Border Background="LightSeaGreen" BorderBrush="CornflowerBlue" Margin="10" Padding="5" BorderThickness="2">
+        <Border Background="LightSeaGreen" BorderBrush="CornflowerBlue" Margin="10">
             <StackPanel>
-                <ListBox SelectedItem="{Binding MesaEditar}"
-                         ItemsSource="{Binding 
-                         Mesa}">
-                    <Interaction.Behaviors>
-                        <EventTriggerBehavior EventName="DoubleTap">
-                            <InvokeCommandAction Command="{Binding EditarMesaCommand}"/>
-                        </EventTriggerBehavior>
-                    </Interaction.Behaviors>
-                    
+                <ListBox Background="LightSeaGreen" SelectedItem="{Binding MesaEditar}"
+                         ItemsSource="{Binding Reservas}"
+                         Height="310">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel />
@@ -90,13 +101,13 @@
                     
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border Background="BlanchedAlmond" BorderBrush="Black" Margin="10" Padding="5" BorderThickness="2">
+                            <Border Background="BlanchedAlmond" BorderBrush="Black" Margin="5" BorderThickness="2">
                                 <StackPanel>
-                                    <Image Width="30" Source="../Assets/Mesa.jpg"/>
-                                    <TextBlock HorizontalAlignment="Center" Text="{Binding evento}"/>
-                                    <TextBlock HorizontalAlignment="Center" Text="{Binding cliente}"/>
-                                    <TextBlock HorizontalAlignment="Center" Text="{Binding asientos}"/>
-                                    <TextBlock HorizontalAlignment="Center" Text="{Binding fecha}"/>
+                                    <Image Width="50" Source="../Assets/Mesa.jpg"/>
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding Evento}"/>
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding Cliente}"/>
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding Asientos}"/>
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding Fecha}"/>
                                 </StackPanel>
                             </Border>
                         </DataTemplate>

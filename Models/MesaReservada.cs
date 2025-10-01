@@ -4,8 +4,8 @@ namespace PrimerProyectoVicente.Models;
 
 public class MesaReservada
 {
-    public string evento { get; set; } = string.Empty;
-    public string cliente { get; set; } = string.Empty;
-    public int asientos { get; set; } = 0;
-    public DateTime fecha { get; set; } = DateTime.Today;
+    public string Evento { get; set; } = string.Empty;
+    public string Cliente { get; set; } = string.Empty;
+    public int Asientos { get; set; } = 0;
+    public DateTime Fecha { get; set; } = DateTime.Today;
 }
