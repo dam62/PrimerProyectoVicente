@@ -71,6 +71,14 @@ public partial class MainWindowViewModel : ViewModelBase
         ModoCrear = false;
         ModoEditar = true;
     }
+    
+    [RelayCommand]
+    public void BotonCancelar()
+    {
+        Mesa = new();
+        ModoCrear = true;
+        ModoEditar = false;
+    }
 
     [RelayCommand]
     public void MostrarOpcionesAvanzadas()

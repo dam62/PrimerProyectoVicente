@@ -79,7 +79,8 @@
                     
                 <Button Width="200"
                         IsVisible="{Binding ModoEditar}"
-                        Margin="10"
+                        Command="{Binding BotonCancelarCommand}"
+                        Margin="0"
                         Content="CANCELAR"
                         Background="Crimson"
                         HorizontalAlignment="Center"
@@ -93,6 +94,14 @@
                 <ListBox Background="LightSeaGreen" SelectedItem="{Binding MesaEditar}"
                          ItemsSource="{Binding Reservas}"
                          Height="310">
+                    
+                    <Interaction.Behaviors>
+                        <EventTriggerBehavior EventName="DoubleTapped">
+                            <InvokeCommandAction 
+                                Command="{Binding EditarMesaCommand}"/>
+                        </EventTriggerBehavior>
+                    </Interaction.Behaviors>
+                    
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel />
