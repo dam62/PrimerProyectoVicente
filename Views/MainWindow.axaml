@@ -35,7 +35,7 @@
                 <StackPanel Margin="10, 30, 0, 0" Orientation="Horizontal" HorizontalAlignment="Center">
                     <!-- Indica el número de asientos -->
                     <TextBlock Text="Número de asientos:" Margin="5"/>
-                    <NumericUpDown Width="140" Margin="0, 0, 30, 0" Minimum="1" Maximum="50" Value="1" ContextFlyout="{Binding Mesa.Asientos}"></NumericUpDown>
+                    <NumericUpDown Width="140" Margin="0, 0, 30, 0" Minimum="1" Maximum="50" Value="{Binding Mesa.Asientos}"></NumericUpDown>
                     
                     <!-- Indica la fecha de la reserva -->
                     <TextBlock Text="Fecha de reserva:" Margin="30, 5, 5, 5"/>
@@ -104,10 +104,10 @@
                             <Border Background="BlanchedAlmond" BorderBrush="Black" Margin="5" BorderThickness="2">
                                 <StackPanel>
                                     <Image Width="50" Source="../Assets/Mesa.jpg"/>
-                                    <TextBlock HorizontalAlignment="Center" Text="{Binding Evento}"/>
-                                    <TextBlock HorizontalAlignment="Center" Text="{Binding Cliente}"/>
-                                    <TextBlock HorizontalAlignment="Center" Text="{Binding Asientos}"/>
-                                    <TextBlock HorizontalAlignment="Center" Text="{Binding Fecha}"/>
+                                    <TextBlock Foreground="Black" HorizontalAlignment="Center" Text="{Binding Evento}"/>
+                                    <TextBlock Foreground="Black" HorizontalAlignment="Center" Text="{Binding Cliente}"/>
+                                    <TextBlock Foreground="Black" HorizontalAlignment="Center" Text="{Binding Asientos}"/>
+                                    <TextBlock Foreground="Black" HorizontalAlignment="Center" Text="{Binding Fecha}"/>
                                 </StackPanel>
                             </Border>
                         </DataTemplate>

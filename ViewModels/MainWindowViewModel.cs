@@ -125,9 +125,17 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     public void CrearReserva(object parameter)
     {
+        bool comprobarFecha = CheckDate();
+        
+        if (comprobarFecha == false)
+        {
+            return;
+        }
+        
         if (!CheckDate())
         {
             Mensaje = "Tienes que indicar la fecha";
+            return;
         }
         
         CheckBox check = (CheckBox)parameter;
@@ -147,9 +155,9 @@ public partial class MainWindowViewModel : ViewModelBase
         else
         {
             Reservas.Add(Mesa);
-            Mesa.Cliente = string.Empty;
-            Mesa.Asientos = 1;
+            Mensaje = string.Empty;
             Mesa = new MesaReservada();
+            check.IsChecked = false;
         }
     }
 }
