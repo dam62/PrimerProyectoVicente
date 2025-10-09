@@ -19,7 +19,7 @@
         <!-- Formulario -->
         <Border Background="LightSeaGreen" BorderBrush="CornflowerBlue" Margin="10" Padding="5" BorderThickness="2">
             <StackPanel>
-                <TextBlock Margin="0, 0, 0, 20" Text="RESERVA TU MESA" HorizontalAlignment="Center"/>
+                <TextBlock FontSize="15" FontWeight="Black" Margin="0, 0, 0, 20" Text="RESERVAS ERCILLA" HorizontalAlignment="Center"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10,0,0,10">
                     <!-- Indica el tipo de evento -->
                     <TextBlock Text="Tipo de reserva:" Margin="5"/>
