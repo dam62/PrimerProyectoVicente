@@ -165,6 +165,7 @@ public partial class MainWindowViewModel : ViewModelBase
             Reservas.Add(Mesa);
             Mensaje = string.Empty;
             Mesa = new MesaReservada();
+            Mesa.Evento = ListaEventos[0];
             check.IsChecked = false;
         }
     }
